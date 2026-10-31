@@ -1,0 +1,46 @@
+[
+  {
+    "id": "a_1788607212474_800",
+    "name": "Sunita Devi",
+    "role": "artisan",
+    "method": "email",
+    "identifier": "artisan@kalasetu.demo",
+    "passwordSalt": "58d87aacd609874199eb168088e58abd",
+    "passwordHash": "fda5ff1b981cf024cce7415780ca8e831ec1b989e350cf86d4d5e883bd1889b5e36a2a7e5666ca2a3d236393c692d34331bf6f833555e58f551ef0286b3d574d",
+    "createdAt": "2026-09-05T11:20:12.475Z",
+    "isDemo": true
+  },
+  {
+    "id": "c_1788607212501_352",
+    "name": "Aarav Sharma",
+    "role": "consumer",
+    "method": "email",
+    "identifier": "consumer@kalasetu.demo",
+    "passwordSalt": "d8d836e5e5946fa71d072d33eee95b17",
+    "passwordHash": "93dd314e25a851480dff6dd569eda9dc469af2c4320fac9581083da9d2e0d1bf51bf39fb2855b9b5fde089f7b826dbab7eefc94a55d12a522c393a09ecaf65c9",
+    "createdAt": "2026-09-05T11:20:12.501Z",
+    "isDemo": true
+  },
+  {
+    "id": "a_1788607212526_512",
+    "name": "Sunita Devi",
+    "role": "artisan",
+    "method": "phone",
+    "identifier": "9876543210",
+    "passwordSalt": "e53a9ab242398ca713d1fbb5b62f5144",
+    "passwordHash": "d947df6e0e5e5778b61be1a2c88f9c321ca3cd6cb70c8d349630420a61d6e6cb65427fc4713de90d7d9811ce8cc22db8c4f5932f374ba7589752aacc12307d35",
+    "createdAt": "2026-09-05T11:20:12.526Z",
+    "isDemo": true
+  },
+  {
+    "id": "c_1788607212550_153",
+    "name": "Aarav Sharma",
+    "role": "consumer",
+    "method": "phone",
+    "identifier": "9876543211",
+    "passwordSalt": "2b188b6602f98ca9f30ddd36d3801755",
+    "passwordHash": "69ea723400f7c1c97ec5659f8d9cc2f7df75172f79563280e32f9033e49eb8a549c2679f5ddba87b7c65cdf1e52b493bc66d821fc6ffb3cb89114e53a393dc62",
+    "createdAt": "2026-09-05T11:20:12.551Z",
+    "isDemo": true
+  }
+]

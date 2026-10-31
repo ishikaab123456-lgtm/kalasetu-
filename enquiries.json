@@ -1,0 +1,35 @@
+[
+  {
+    "id": "e_1788545801272",
+    "productId": "p_1788541487963",
+    "productName": "Authentic Hand-Painted Khurja Blue Pottery Vase",
+    "buyerName": "Aditi",
+    "contact": "aditi@xyz.com",
+    "message": "i want to gift this product to someone",
+    "intent": "Buy this product",
+    "status": "Pending",
+    "createdAt": "2026-09-04T18:16:41.287Z"
+  },
+  {
+    "id": "e1",
+    "productId": "p1",
+    "productName": "Handcrafted Mirror-Work Embroidered Tote Bag",
+    "buyerName": "Aditi Sharma",
+    "contact": "+91 98765 43210",
+    "message": "Namaste Sunita Ji, can I order 2 custom blue colored bags for an upcoming wedding?",
+    "intent": "Request a custom order",
+    "status": "Pending",
+    "createdAt": "2026-09-03T16:27:11.565Z"
+  },
+  {
+    "id": "e2",
+    "productId": "p2",
+    "productName": "Authentic Khurja Blue Pottery Decorative Vase",
+    "buyerName": "Vikram Mehta",
+    "contact": "vikram@example.com",
+    "message": "Is express delivery available to Mumbai? I would like to buy this vase.",
+    "intent": "Buy this product",
+    "status": "Replied",
+    "createdAt": "2026-09-02T16:27:11.565Z"
+  }
+]

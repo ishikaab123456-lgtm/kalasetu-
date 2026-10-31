@@ -1,0 +1,14 @@
+If you see: Cannot find module 'dotenv'
+
+Open Command Prompt in THIS project folder and run:
+
+npm install
+npm start
+
+If it still happens, run:
+
+rmdir /s /q node_modules
+npm install
+npm start
+
+Do not open index.js directly before running npm install.

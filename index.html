@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KalaSetu — Unified Indian Artisan Marketplace & AI Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="desktop-wrapper">
+
+  <!-- Desktop Branding Panel -->
+  <div class="side-branding">
+    <div class="brand-badge">SIH26090 • AI Marketplace</div>
+    <h1>Kala<span>Setu</span></h1>
+    <p>Empowering traditional Indian artisans through AI-driven voice listings, smart pricing, and luxury craft storytelling.</p>
+    
+    <div class="feature-pill-list">
+      <div class="feature-pill"><span class="icon">🎨</span> Terracotta & Royal Indigo Theme</div>
+      <div class="feature-pill"><span class="icon">🪄</span> Gemini 3.6 Flash AI Listing</div>
+      <div class="feature-pill"><span class="icon">🎤</span> Multilingual Voice-to-Text</div>
+      <div class="feature-pill"><span class="icon">💰</span> Smart Cost & Margin Pricing</div>
+      <div class="feature-pill"><span class="icon">⚡</span> Instant 1-Tap Mode Switcher</div>
+    </div>
+  </div>
+
+  <!-- Mobile Phone Device Shell -->
+  <div class="mobile-frame">
+
+    <!-- Top Status Notch Bar -->
+    <div class="phone-status-bar">
+      <span>9:41</span>
+      <span>KalaSetu 5G ●●●</span>
+    </div>
+
+
+    <!-- Secure Role + Password Authentication Gate -->
+    <section class="auth-gate" id="authGate">
+      <div class="auth-scroll">
+        <div class="auth-brand-row">
+          <div class="auth-logo">🎨</div>
+          <div>
+            <div class="auth-brand">KalaSetu</div>
+            <div class="auth-tagline">From Craft to Catalog in One Voice</div>
+          </div>
+        </div>
+
+        <div class="auth-card">
+          <div class="auth-kicker">SECURE SIGN IN</div>
+          <h2 id="authHeading">Artisan Login</h2>
+          <p id="authSubheading">Access your AI Studio, catalogue and buyer enquiries.</p>
+
+          <div class="auth-section-label">I am a</div>
+          <div class="segmented-control role-segment">
+            <button type="button" class="segment active" id="authRoleArtisan" onclick="selectAuthRole('artisan')">
+              <span>🧵</span><strong>Artisan</strong><small>Create & sell crafts</small>
+            </button>
+            <button type="button" class="segment" id="authRoleConsumer" onclick="selectAuthRole('consumer')">
+              <span>🛍️</span><strong>Consumer</strong><small>Discover & buy crafts</small>
+            </button>
+          </div>
+
+          <div class="auth-section-label">Sign in using</div>
+          <div class="method-toggle">
+            <button type="button" id="authMethodPhone" class="method-btn active" onclick="selectAuthMethod('phone')">📱 Mobile Number</button>
+            <button type="button" id="authMethodEmail" class="method-btn" onclick="selectAuthMethod('email')">✉️ Email</button>
+          </div>
+
+          <!-- LOGIN -->
+          <div id="authLoginPanel">
+            <div class="form-group auth-name-group">
+              <label id="authIdentifierLabel">Mobile Number</label>
+              <div class="auth-input-wrap">
+                <span id="authPrefix" class="auth-prefix">+91</span>
+                <input type="tel" id="authIdentifier" inputmode="numeric" maxlength="10" placeholder="10-digit mobile number" autocomplete="username">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Password</label>
+              <div class="auth-input-wrap password-wrap">
+                <span class="password-lock">🔒</span>
+                <input type="password" id="authPassword" placeholder="Enter password" autocomplete="current-password" onkeydown="authEnterToLogin(event)">
+                <button type="button" class="password-eye" onclick="togglePasswordVisibility('authPassword', this)" aria-label="Show password">👁</button>
+              </div>
+            </div>
+
+            <div class="auth-options-row">
+              <label class="remember-row">
+                <input type="checkbox" id="authRemember" checked>
+                <span>Remember me</span>
+              </label>
+              <button type="button" class="text-link" onclick="showForgotPassword()">Forgot password?</button>
+            </div>
+
+            <div class="auth-error" id="authError"></div>
+            <button class="btn-primary auth-main-btn" id="loginBtn" onclick="loginWithPassword()">Login →</button>
+
+            <div class="auth-divider"><span>New to KalaSetu?</span></div>
+            <button type="button" class="auth-secondary-btn" onclick="showSignup()">Create New Account</button>
+
+            <div class="auth-demo-note">
+              <strong>SIH demo accounts</strong><br>
+              Artisan email: artisan@kalasetu.demo<br>
+              Consumer email: consumer@kalasetu.demo<br>
+              Password: <strong>KalaSetu@123</strong>
+            </div>
+          </div>
+
+          <!-- SIGNUP -->
+          <div id="authSignupPanel" class="auth-subpanel" style="display:none;">
+            <button type="button" class="auth-back-link" onclick="showLoginPanel()">← Back to login</button>
+            <h3>Create <span id="signupRoleLabel">Artisan</span> account</h3>
+            <p class="auth-panel-copy">Create one secure account for your KalaSetu experience.</p>
+
+            <div class="form-group">
+              <label>Your Name</label>
+              <input type="text" id="signupName" placeholder="e.g. Sunita Devi" autocomplete="name">
+            </div>
+
+            <div class="form-group">
+              <label id="signupIdentifierLabel">Mobile Number</label>
+              <div class="auth-input-wrap">
+                <span id="signupPrefix" class="auth-prefix">+91</span>
+                <input type="tel" id="signupIdentifier" inputmode="numeric" maxlength="10" placeholder="10-digit mobile number" autocomplete="username">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Create Password</label>
+              <div class="auth-input-wrap password-wrap">
+                <span class="password-lock">🔒</span>
+                <input type="password" id="signupPassword" placeholder="Minimum 8 characters" autocomplete="new-password" oninput="renderPasswordStrength(this.value)">
+                <button type="button" class="password-eye" onclick="togglePasswordVisibility('signupPassword', this)">👁</button>
+              </div>
+              <div class="password-strength" id="passwordStrength">Use 8+ characters with uppercase, lowercase and a number.</div>
+            </div>
+
+            <div class="form-group">
+              <label>Confirm Password</label>
+              <div class="auth-input-wrap password-wrap">
+                <span class="password-lock">🔒</span>
+                <input type="password" id="signupConfirmPassword" placeholder="Re-enter password" autocomplete="new-password">
+                <button type="button" class="password-eye" onclick="togglePasswordVisibility('signupConfirmPassword', this)">👁</button>
+              </div>
+            </div>
+
+            <div class="auth-error" id="signupError"></div>
+            <button class="btn-primary auth-main-btn" id="signupBtn" onclick="createPasswordAccount()">Create Account →</button>
+          </div>
+
+          <!-- FORGOT PASSWORD -->
+          <div id="authForgotPanel" class="auth-subpanel" style="display:none;">
+            <button type="button" class="auth-back-link" onclick="showLoginPanel()">← Back to login</button>
+            <div class="reset-icon">🔑</div>
+            <h3>Forgot Password?</h3>
+            <p class="auth-panel-copy">Enter the registered phone number or email for the selected role.</p>
+
+            <div class="form-group">
+              <label id="forgotIdentifierLabel">Mobile Number</label>
+              <div class="auth-input-wrap">
+                <span id="forgotPrefix" class="auth-prefix">+91</span>
+                <input type="tel" id="forgotIdentifier" inputmode="numeric" maxlength="10" placeholder="10-digit mobile number">
+              </div>
+            </div>
+
+            <div class="auth-error" id="forgotError"></div>
+            <button class="btn-primary auth-main-btn" id="forgotBtn" onclick="requestPasswordReset()">Continue →</button>
+
+            <div class="auth-trust-card">
+              🔒 <strong>No OTP is used.</strong> In this SIH local prototype, a time-limited reset session opens directly. In production, the same reset token can be delivered by secure email/SMS link.
+            </div>
+          </div>
+
+          <!-- RESET PASSWORD -->
+          <div id="authResetPanel" class="auth-subpanel" style="display:none;">
+            <button type="button" class="auth-back-link" onclick="showForgotPassword()">← Start again</button>
+            <div class="reset-icon">✓</div>
+            <h3>Create New Password</h3>
+            <p class="auth-panel-copy">Choose a strong new password for your account.</p>
+
+            <div class="form-group">
+              <label>New Password</label>
+              <div class="auth-input-wrap password-wrap">
+                <span class="password-lock">🔒</span>
+                <input type="password" id="resetPassword" placeholder="Minimum 8 characters" oninput="renderResetPasswordStrength(this.value)">
+                <button type="button" class="password-eye" onclick="togglePasswordVisibility('resetPassword', this)">👁</button>
+              </div>
+              <div class="password-strength" id="resetPasswordStrength">Use 8+ characters with uppercase, lowercase and a number.</div>
+            </div>
+
+            <div class="form-group">
+              <label>Confirm New Password</label>
+              <div class="auth-input-wrap password-wrap">
+                <span class="password-lock">🔒</span>
+                <input type="password" id="resetConfirmPassword" placeholder="Re-enter new password">
+                <button type="button" class="password-eye" onclick="togglePasswordVisibility('resetConfirmPassword', this)">👁</button>
+              </div>
+            </div>
+
+            <div class="auth-error" id="resetError"></div>
+            <button class="btn-primary auth-main-btn" id="resetBtn" onclick="resetAccountPassword()">Save New Password →</button>
+          </div>
+        </div>
+
+        <div class="auth-footer-note">
+          <strong>Password security:</strong> passwords are stored as salted hashes, never as plain text.
+        </div>
+      </div>
+    </section>
+
+    <!-- Top App Bar with 1-Tap Mode Switcher -->
+    <div class="app-top-header">
+      <div class="app-title-area">
+        <div class="app-logo-icon">🎨</div>
+        <div>
+          <div class="app-brand-name">KalaSetu</div>
+          <div class="app-brand-subtitle" id="topModeSubtitle">Consumer Marketplace</div>
+        </div>
+      </div>
+
+      <!-- 1-Tap Mode Switcher Button -->
+      <div class="header-actions">
+        <button class="role-switch-btn" id="roleSwitchBtn" onclick="toggleAppMode()" title="Switch role securely">
+          <span id="roleSwitchIcon">🎨</span>
+          <span id="roleSwitchText">Artisan Studio</span>
+        </button>
+        <button class="logout-icon-btn" onclick="logoutUser()" title="Logout" aria-label="Logout">↪</button>
+      </div>
+    </div>
+
+    <!-- Dynamic Screen Scroll Body Container -->
+    <div class="screen-scroll-container" id="screenContainer">
+
+      <!-- ========================================== -->
+      <!-- CONSUMER MODE SCREENS                      -->
+      <!-- ========================================== -->
+
+      <!-- 1. Consumer Home Screen -->
+      <section class="screen-page active-page" id="c-home">
+        <div class="banner-terracotta">
+          <div class="badge-gold">Handmade Heritage</div>
+          <h3>Discover Authentic Indian Crafts</h3>
+          <p>Directly from verified village artisans to your home with transparent story-led pricing.</p>
+        </div>
+
+        <div style="background:var(--ivory-card); border:1.5px solid var(--border-line); padding:11px 14px; border-radius:var(--radius-md); display:flex; align-items:center; gap:8px; margin-bottom:16px; cursor:pointer;" onclick="switchConsumerTab('c-browse')">
+          <span style="font-size:16px; color:var(--text-muted);">🔍</span>
+          <span style="font-size:13px; color:var(--text-muted);">Search blue pottery, silk sarees, woodcraft…</span>
+        </div>
+
+        <div class="section-header">
+          <h3>Explore Categories</h3>
+        </div>
+
+        <div class="cat-grid">
+          <div class="cat-item" onclick="filterCategory('Pottery')"><span class="cat-emoji">🏺</span><span class="cat-name">Pottery</span></div>
+          <div class="cat-item" onclick="filterCategory('Textiles')"><span class="cat-emoji">🧵</span><span class="cat-name">Textiles</span></div>
+          <div class="cat-item" onclick="filterCategory('Jewelry')"><span class="cat-emoji">💍</span><span class="cat-name">Jewelry</span></div>
+          <div class="cat-item" onclick="filterCategory('Woodwork')"><span class="cat-emoji">🪵</span><span class="cat-name">Woodwork</span></div>
+          <div class="cat-item" onclick="filterCategory('Bags')"><span class="cat-emoji">🛍️</span><span class="cat-name">Bags</span></div>
+          <div class="cat-item" onclick="filterCategory('Paintings')"><span class="cat-emoji">🖼️</span><span class="cat-name">Paintings</span></div>
+          <div class="cat-item" onclick="filterCategory('Metalwork')"><span class="cat-emoji">🔔</span><span class="cat-name">Metal</span></div>
+          <div class="cat-item" onclick="filterCategory('All')"><span class="cat-emoji">✨</span><span class="cat-name">All</span></div>
+        </div>
+
+        <!-- AI Personalization Summary -->
+        <div class="ai-personalization-strip" id="aiPersonalizationStrip">
+          <div>
+            <div class="ai-personalization-kicker">✨ KALASETU AI PICKS</div>
+            <div class="ai-personalization-title">Personalized for you</div>
+            <div class="ai-personalization-copy" id="cPreferenceSummary">Choose your interests to improve recommendations.</div>
+          </div>
+          <button class="ai-tune-btn" onclick="showConsumerOnboarding(false)">Tune</button>
+        </div>
+
+
+<button class="analytics-entry-card" onclick="openDataInsights('buying')">
+  <div class="analytics-entry-icon">📈</div>
+  <div>
+    <strong>Market Trends & Buyer Insights</strong>
+    <span>See what is trending, buyer spending and fields of interest</span>
+  </div>
+  <b>→</b>
+</button>
+
+        <div class="section-header">
+          <div>
+            <h3>Recommended for You</h3>
+            <div class="recommendation-subtitle" id="cRecommendationReason">Based on your interests + buyer popularity</div>
+          </div>
+          <span class="ai-badge" id="cRecommendationAiBadge">SMART RANKED</span>
+        </div>
+
+        <div class="product-grid" id="cRecommendedGrid">
+          <!-- Personalized by recommendation engine -->
+        </div>
+
+        <div class="section-header" style="margin-top:18px;">
+          <div>
+            <h3>🔥 Bestsellers</h3>
+            <div class="recommendation-subtitle">Popular with KalaSetu buyers</div>
+          </div>
+          <span class="see-all-link" onclick="switchConsumerTab('c-browse')">View All →</span>
+        </div>
+
+        <div class="product-grid" id="cBestsellerGrid">
+          <!-- Ranked by sales + enquiries + views -->
+        </div>
+
+        <!-- Live & Upcoming Auctions Spotlight on Home -->
+        <div class="section-header" style="margin-top:18px;">
+          <div style="display:flex; align-items:center; gap:6px;">
+            <span class="live-pulse-dot"></span>
+            <h3>Live & Upcoming Bidding</h3>
+          </div>
+          <span class="see-all-link" onclick="switchConsumerTab('c-auction')">View Auctions →</span>
+        </div>
+        <div id="cHomeAuctionsGrid" style="margin-bottom:18px;">
+          <!-- Populated by JS -->
+        </div>
+
+        <div class="section-header">
+          <h3>Explore More Crafts</h3>
+          <span class="see-all-link" onclick="switchConsumerTab('c-browse')">View All →</span>
+        </div>
+
+        <div class="product-grid" id="cHomeFeaturedGrid">
+          <!-- Populated by JS -->
+        </div>
+      </section>
+
+      <!-- LIVE AUCTIONS & BIDDING ROOM SCREEN -->
+      <section class="screen-page" id="c-auction">
+        <div class="banner-terracotta" style="padding:14px 16px; margin-bottom:14px; background:linear-gradient(135deg, #8B3A2B 0%, #4A281E 100%);">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <div>
+              <div class="badge-gold" style="font-size:10px; text-transform:uppercase; letter-spacing:0.5px;">⚡ Real-time Marketplace</div>
+              <h3 style="margin-top:4px; font-size:17px;">Live Artisan Auctions</h3>
+            </div>
+            <span style="font-size:28px;">🔨</span>
+          </div>
+          <p style="margin-top:4px; font-size:12px; opacity:0.9;">Place live bids directly with village artisans. Instant sale triggered when buyout target is met!</p>
+        </div>
+
+        <!-- Live Auctions Selector / Tabs -->
+        <div id="auctionListContainer">
+          <!-- Render active auction cards -->
+        </div>
+
+        <!-- Active Live Bidding Room View -->
+        <div id="activeAuctionRoom" style="display:none;">
+          <!-- Render selected auction live room -->
+        </div>
+      </section>
+
+
+      <!-- 2. Consumer Browse & Search Screen -->
+      <section class="screen-page" id="c-browse">
+        <div class="form-group" style="margin-bottom:12px;">
+          <input type="text" id="searchInput" placeholder="🔍 Search by craft, material, or artisan..." oninput="onSearchInput()">
+        </div>
+
+        <div style="display:flex; gap:8px; overflow-x:auto; padding-bottom:6px; margin-bottom:14px;" id="cCategoryChips">
+          <!-- Chips generated by JS -->
+        </div>
+
+        <div class="section-header">
+          <h3 id="cBrowseHeaderTitle">All Crafts</h3>
+        </div>
+
+        <div class="product-grid" id="cBrowseGrid">
+          <!-- Populated by JS -->
+        </div>
+      </section>
+
+      <!-- 3. Consumer Product Detail Screen -->
+      <section class="screen-page" id="c-detail">
+        <div style="position:relative; height:200px; background:var(--terracotta-light); border-radius:var(--radius-md); overflow:hidden; margin-bottom:14px;" id="cDetailImageContainer">
+          <img id="cDetailImage" src="" style="width:100%; height:100%; object-fit:cover;">
+          <button class="wishlist-heart-btn" id="cDetailHeart" onclick="toggleDetailWishlist()">♡</button>
+        </div>
+
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;">
+          <span id="cDetailCategory" style="font-size:11px; font-weight:800; color:var(--terracotta); text-transform:uppercase; letter-spacing:0.5px;">CATEGORY</span>
+          <span id="cDetailMaterial" style="font-size:11px; color:var(--text-muted); font-weight:600;">MATERIAL</span>
+        </div>
+
+        <h2 id="cDetailTitle" style="font-size:17px; font-weight:900; color:var(--indigo); margin-bottom:8px; line-height:1.3;">Product Name</h2>
+
+        <div style="display:flex; align-items:baseline; gap:8px; margin-bottom:12px;">
+          <span id="cDetailPrice" style="font-size:22px; font-weight:900; color:var(--indigo);">₹0</span>
+          <span id="cDetailPriceRange" style="font-size:12px; color:var(--text-muted);">Recommended fair price</span>
+        </div>
+
+        <div class="card-box" style="margin-bottom:12px;">
+          <h4 style="font-size:12px; font-weight:800; color:var(--indigo); margin-bottom:6px;">DESCRIPTION</h4>
+          <p id="cDetailDescription" style="font-size:13px; color:var(--text-primary); line-height:1.5;">Description goes here...</p>
+        </div>
+
+        <!-- Artisan Spotlight Card -->
+        <div class="card-box" style="border-left:4px solid var(--terracotta); cursor:pointer;" onclick="openArtisanProfileFromDetail()">
+          <div style="display:flex; align-items:center; gap:12px;">
+            <div style="width:42px; height:42px; border-radius:50%; background:var(--terracotta); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:16px;" id="cDetailArtisanAvatar">A</div>
+            <div>
+              <div id="cDetailArtisanName" style="font-size:14px; font-weight:800; color:var(--indigo);">Artisan Name</div>
+              <div id="cDetailArtisanLoc" style="font-size:11.5px; color:var(--text-muted);">Location</div>
+            </div>
+            <span style="margin-left:auto; color:var(--terracotta); font-weight:800;">View Bio ›</span>
+          </div>
+          <p id="cDetailStory" style="font-size:12px; color:var(--text-primary); margin-top:8px; font-style:italic; line-height:1.4;">"Craft story..."</p>
+        </div>
+
+        <div style="display:flex; gap:10px; margin-top:16px;">
+          <button class="btn-primary" onclick="openEnquiryModal()">🛒 Order / Enquire Now</button>
+        </div>
+      </section>
+
+      <!-- 4. Artisan Profile / Story Screen -->
+      <section class="screen-page" id="c-artisan">
+        <div style="text-align:center; padding:10px 0 16px;">
+          <div style="width:72px; height:72px; border-radius:50%; background:var(--terracotta); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:26px; margin:0 auto 10px;" id="artisanProfileAvatar">A</div>
+          <h3 id="artisanProfileName" style="font-size:18px; font-weight:900; color:var(--indigo);">Sunita Devi</h3>
+          <p id="artisanProfileLoc" style="font-size:12px; color:var(--text-muted); margin-top:2px;">Jaipur, Rajasthan • Master Artisan</p>
+        </div>
+
+        <div class="stats-grid" style="margin-bottom:16px;">
+          <div class="stat-card">
+            <div class="stat-icon-box">🏆</div>
+            <div>
+              <div class="stat-num" id="artisanYears">18</div>
+              <div class="stat-label">Years Crafting</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon-box">⭐</div>
+            <div>
+              <div class="stat-num" id="artisanRating">4.9</div>
+              <div class="stat-label">Rating</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-box">
+          <h4 style="font-size:12px; font-weight:800; color:var(--indigo); margin-bottom:6px;">ARTISAN JOURNEY</h4>
+          <p id="artisanBioText" style="font-size:13px; color:var(--text-primary); line-height:1.6;">Bio content...</p>
+        </div>
+
+        <div class="section-header">
+          <h3>More Crafts from this Artisan</h3>
+        </div>
+        <div class="product-grid" id="artisanProductsGrid">
+          <!-- Populated by JS -->
+        </div>
+      </section>
+
+      <!-- 5. Enquiry / Buy Form Screen -->
+      <section class="screen-page" id="c-enquiry">
+        <div class="card-box" style="border-top:4px solid var(--terracotta);">
+          <div style="font-size:11px; font-weight:700; color:var(--text-muted); text-transform:uppercase;">Inquiring Regarding</div>
+          <div id="enquiryProductName" style="font-size:15px; font-weight:900; color:var(--indigo); margin-top:2px;">Product Title</div>
+        </div>
+
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" id="enquiryName" placeholder="Full Name (e.g. Aditi Sharma)">
+        </div>
+
+        <div class="form-group">
+          <label>Phone / Email Contact</label>
+          <input type="text" id="enquiryContact" placeholder="Where can the artisan contact you?">
+        </div>
+
+        <div class="form-group">
+          <label>Intent</label>
+          <select id="enquiryIntent">
+            <option>Buy this product</option>
+            <option>Request a custom order</option>
+            <option>Ask a question</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Message for Artisan</label>
+          <textarea id="enquiryMessage" rows="3" placeholder="Tell the artisan what you need or ask any questions..."></textarea>
+        </div>
+
+        <button class="btn-primary" onclick="submitEnquiryForm()">📤 Send Enquiry to Artisan</button>
+      </section>
+
+      <!-- 6. Consumer Wishlist Screen -->
+      <section class="screen-page" id="c-wishlist">
+        <div class="section-header">
+          <h3>Saved Crafts</h3>
+        </div>
+        <div id="wishlistContainer">
+          <!-- Populated by JS -->
+        </div>
+      </section>
+
+      <!-- 7. Consumer Orders / Enquiries Screen -->
+      <section class="screen-page" id="c-orders">
+        <div class="section-header">
+          <h3>Your Enquiries & Orders</h3>
+        </div>
+        <div id="ordersContainer">
+          <!-- Populated by JS -->
+        </div>
+      </section>
+
+
+      <!-- ========================================== -->
+      <!-- ARTISAN MODE MOBILE STUDIO SCREENS         -->
+      <!-- ========================================== -->
+
+      <!-- 1. Artisan Dashboard Screen -->
+      <section class="screen-page" id="a-dash">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;">
+          <div>
+            <h2 style="font-size:18px; font-weight:900; color:var(--indigo);">Namaste, <span id="artisanGreetingName">Sunita</span> 👋</h2>
+            <p style="font-size:12px; color:var(--terracotta-dark); font-weight:700;">ShilpSetu AI Studio</p>
+          </div>
+          <span style="background:var(--terracotta-light); color:var(--terracotta-dark); font-size:10px; font-weight:800; padding:4px 10px; border-radius:99px; border:1px solid var(--terracotta);">ARTISAN MODE</span>
+        </div>
+
+        <div class="banner-terracotta" style="margin-bottom:16px;">
+          <div class="badge-gold">Snap • Speak • Sell</div>
+          <h3>Create AI Listing in 60s</h3>
+          <p>Upload craft photo, speak in your native language, and generate smart market pricing.</p>
+          <button class="btn-primary" style="margin-top:14px; background:var(--marigold); color:var(--indigo-dark);" onclick="launchAddProductWizard()">
+            🪄 Launch AI Add Product Wizard
+          </button>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon-box">📦</div>
+            <div>
+              <div class="stat-num" id="aStatTotal">0</div>
+              <div class="stat-label">Total Products</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon-box">🌐</div>
+            <div>
+              <div class="stat-num" id="aStatPublished">0</div>
+              <div class="stat-label">Published</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon-box">👁️</div>
+            <div>
+              <div class="stat-num" id="aStatViews">0</div>
+              <div class="stat-label">Total Views</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon-box">💬</div>
+            <div>
+              <div class="stat-num" id="aStatEnquiries">0</div>
+              <div class="stat-label">Buyer Enquiries</div>
+            </div>
+          </div>
+        </div>
+
+
+<button class="analytics-entry-card artisan-entry" onclick="openDataInsights('selling')">
+  <div class="analytics-entry-icon">📊</div>
+  <div>
+    <strong>Sales & Performance Analytics</strong>
+    <span>Track products sold, impressions, revenue and top crafts</span>
+  </div>
+  <b>→</b>
+</button>
+
+        <div class="section-header">
+          <h3>Your Active Catalogue</h3>
+          <span class="see-all-link" onclick="switchArtisanTab('a-products')">Manage →</span>
+        </div>
+
+        <div id="aDashRecentProducts">
+          <!-- Populated by JS -->
+        </div>
+      </section>
+
+      <!-- 2. Artisan 5-Step AI Add Product Wizard -->
+      <section class="screen-page" id="a-wizard">
+        <div class="wizard-rail" id="wizardProgressRail">
+          <div class="wizard-step-node active" id="wnode-0"><div class="circle">1</div><span>Photo</span></div>
+          <div class="wizard-step-node" id="wnode-1"><div class="circle">2</div><span>Voice</span></div>
+          <div class="wizard-step-node" id="wnode-2"><div class="circle">3</div><span>AI Listing</span></div>
+          <div class="wizard-step-node" id="wnode-3"><div class="circle">4</div><span>Pricing</span></div>
+          <div class="wizard-step-node" id="wnode-4"><div class="circle">5</div><span>Publish</span></div>
+        </div>
+
+        <div id="wizardStepContent">
+          <!-- Dynamic Wizard Step Content rendered by JS -->
+        </div>
+      </section>
+
+      <!-- 3. Artisan Products Catalogue Management -->
+      <section class="screen-page" id="a-products">
+        <div class="section-header">
+          <h3>Catalogue Management</h3>
+          <button class="btn-primary" style="padding:6px 12px; font-size:11.5px; width:auto;" onclick="launchAddProductWizard()">+ Add New</button>
+        </div>
+        <div id="aProductsList">
+          <!-- Populated by JS -->
+        </div>
+      </section>
+
+      <!-- 4. Artisan Analytics Screen -->
+      <section class="screen-page" id="a-analytics">
+        <div class="section-header">
+          <h3>Performance Analytics</h3>
+        </div>
+        <div class="card-box">
+          <h4 style="font-size:13px; font-weight:800; color:var(--indigo); margin-bottom:10px;">Product Views & Engagement</h4>
+          <div id="aAnalyticsList">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. Artisan Profile & Craft Story Editor -->
+      <section class="screen-page" id="a-profile">
+        <div class="section-header">
+          <h3>Artisan Studio Profile</h3>
+        </div>
+        <div class="card-box">
+          <div class="form-group">
+            <label>Artisan Name</label>
+            <input type="text" id="aProfileName" value="Sunita Devi">
+          </div>
+          <div class="form-group">
+            <label>Craft Specialization</label>
+            <input type="text" id="aProfileCraft" value="Mirror-Work & Embroidery">
+          </div>
+          <div class="form-group">
+            <label>Location</label>
+            <input type="text" id="aProfileLoc" value="Jaipur, Rajasthan">
+          </div>
+          <div class="form-group">
+            <label>Craft Heritage Story</label>
+            <textarea id="aProfileBio" rows="4">Sunita has been practicing traditional Rajasthani mirror embroidery for over 18 years, training young women artisans in her village to preserve handmade textile heritage.</textarea>
+          </div>
+          <button class="btn-primary" onclick="saveArtisanProfile()">Save Profile Details</button>
+        </div>
+      </section>
+
+
+<!-- ========================================== -->
+<!-- DATA INTELLIGENCE — BUYING + SELLING       -->
+<!-- ========================================== -->
+<section class="screen-page" id="data-insights">
+  <div class="analytics-hero">
+    <div>
+      <div class="analytics-kicker">KALASETU DATA INTELLIGENCE</div>
+      <h2>Market Pulse</h2>
+      <p>Understand what consumers are buying and how artisans are selling.</p>
+    </div>
+    <div class="analytics-live-badge">● DEMO LIVE</div>
+  </div>
+
+  <div class="analytics-mode-switch">
+    <button id="analyticsSellingBtn" class="analytics-mode-btn active" onclick="setAnalyticsView('selling')">
+      <span>🧵</span>
+      <div><strong>Artisan Selling</strong><small>Sales • reach • products</small></div>
+    </button>
+    <button id="analyticsBuyingBtn" class="analytics-mode-btn" onclick="setAnalyticsView('buying')">
+      <span>🛍️</span>
+      <div><strong>Consumer Buying</strong><small>Trends • spend • interests</small></div>
+    </button>
+  </div>
+
+  <div class="analytics-source-strip">
+    <span>🔐 Aggregated insights — no buyer personal details shown</span>
+    <span id="analyticsDbBadge">LOCAL DATA</span>
+  </div>
+
+  <!-- ARTISAN SELLING ANALYTICS -->
+  <div id="analyticsSellingPanel">
+    <div class="analytics-section-title">
+      <div>
+        <h3>Artisan Selling Performance</h3>
+        <p>How products are performing across the marketplace.</p>
+      </div>
+      <span class="analytics-period">6M VIEW</span>
+    </div>
+
+    <div class="analytics-kpi-grid">
+      <div class="analytics-kpi">
+        <div class="analytics-kpi-icon terracotta">📦</div>
+        <div><span>Units Sold</span><strong id="sellKpiUnits">—</strong><small>demo marketplace</small></div>
+      </div>
+      <div class="analytics-kpi">
+        <div class="analytics-kpi-icon indigo">₹</div>
+        <div><span>Sales Value</span><strong id="sellKpiRevenue">—</strong><small>sales × price</small></div>
+      </div>
+      <div class="analytics-kpi">
+        <div class="analytics-kpi-icon gold">👁</div>
+        <div><span>Impressions</span><strong id="sellKpiViews">—</strong><small>product views</small></div>
+      </div>
+      <div class="analytics-kpi">
+        <div class="analytics-kpi-icon green">↗</div>
+        <div><span>Sales / Views</span><strong id="sellKpiConversion">—</strong><small>conversion signal</small></div>
+      </div>
+    </div>
+
+    <div class="analytics-chart-card">
+      <div class="analytics-chart-heading">
+        <div><h4>Sales Trend</h4><p>Units sold across the last 6 months</p></div>
+        <span class="chart-legend-dot">● Units</span>
+      </div>
+      <div class="analytics-svg-chart" id="sellingTrendChart"></div>
+      <div class="analytics-chart-note">Illustrative 6-month trend for the SIH demo; totals use current product metrics.</div>
+    </div>
+
+    <div class="analytics-chart-card">
+      <div class="analytics-chart-heading">
+        <div><h4>Top Products Sold</h4><p>Which products are moving fastest</p></div>
+        <span>🏆</span>
+      </div>
+      <div id="topSellingProductsChart" class="analytics-bars"></div>
+    </div>
+
+    <div class="analytics-chart-card">
+      <div class="analytics-chart-heading">
+        <div><h4>Revenue by Craft Category</h4><p>Where artisan sales value is coming from</p></div>
+        <span>₹</span>
+      </div>
+      <div id="sellingCategoryChart" class="analytics-bars"></div>
+    </div>
+
+    <div class="analytics-mini-grid">
+      <div class="analytics-mini-card">
+        <span>💬 Buyer Enquiries</span>
+        <strong id="sellBuyerEnquiries">—</strong>
+        <small>direct purchase interest</small>
+      </div>
+      <div class="analytics-mini-card">
+        <span>🧾 Avg. Order Value</span>
+        <strong id="sellAverageOrder">—</strong>
+        <small>demo spend per unit</small>
+      </div>
+    </div>
+
+    <div class="analytics-insight-card">
+      <div class="analytics-insight-icon">✨</div>
+      <div>
+        <strong>AI Business Insights</strong>
+        <div id="sellingInsightsList"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONSUMER BUYING ANALYTICS -->
+  <div id="analyticsBuyingPanel" style="display:none;">
+    <div class="analytics-section-title">
+      <div>
+        <h3>Consumer Buying Pulse</h3>
+        <p>What buyers want, what is trending and where money is going.</p>
+      </div>
+      <span class="analytics-period">MARKET</span>
+    </div>
+
+    <div class="analytics-kpi-grid">
+      <div class="analytics-kpi">
+        <div class="analytics-kpi-icon indigo">₹</div>
+        <div><span>Buyer Spending</span><strong id="buyKpiSpend">—</strong><small>demo marketplace</small></div>
+      </div>
+      <div class="analytics-kpi">
+        <div class="analytics-kpi-icon terracotta">🛍</div>
+        <div><span>Avg. Spend</span><strong id="buyKpiAverage">—</strong><small>per demo unit</small></div>
+      </div>
+      <div class="analytics-kpi">
+        <div class="analytics-kpi-icon gold">🔥</div>
+        <div><span>Categories</span><strong id="buyKpiCategories">—</strong><small>active crafts</small></div>
+      </div>
+      <div class="analytics-kpi">
+        <div class="analytics-kpi-icon green">✓</div>
+        <div><span>Products Bought</span><strong id="buyKpiProducts">—</strong><small>demo units</small></div>
+      </div>
+    </div>
+
+    <div class="analytics-chart-card">
+      <div class="analytics-chart-heading">
+        <div><h4>🔥 What's Trending Now</h4><p>Category trend score from sales + views + enquiries</p></div>
+        <span class="ai-badge">LIVE RANK</span>
+      </div>
+      <div id="consumerTrendingChart" class="analytics-bars trend-bars"></div>
+    </div>
+
+    <div class="analytics-chart-card">
+      <div class="analytics-chart-heading">
+        <div><h4>Buyer Spending Trend</h4><p>Marketplace buying value across 6 months</p></div>
+        <span class="chart-legend-dot">● Spend</span>
+      </div>
+      <div class="analytics-svg-chart" id="buyerSpendingTrendChart"></div>
+      <div class="analytics-chart-note">Illustrative trend until KalaSetu collects dated production orders.</div>
+    </div>
+
+    <div class="analytics-chart-card">
+      <div class="analytics-chart-heading">
+        <div><h4>Buyer Spend by Category</h4><p>Share of demo sales value</p></div>
+        <span>💳</span>
+      </div>
+      <div class="analytics-donut-layout">
+        <div id="buyerSpendDonut" class="analytics-donut"><div class="analytics-donut-center"><strong>₹</strong><small>SPEND</small></div></div>
+        <div id="buyerSpendLegend" class="analytics-donut-legend"></div>
+      </div>
+    </div>
+
+    <div class="analytics-chart-card">
+      <div class="analytics-chart-heading">
+        <div><h4>Fields of Interest</h4><p>Interest signal from views + preferences + interactions</p></div>
+        <span>♡</span>
+      </div>
+      <div id="consumerInterestChart" class="analytics-bars interest-bars"></div>
+      <div id="personalInterestChips" class="analytics-interest-chips"></div>
+    </div>
+
+    <div class="analytics-chart-card">
+      <div class="analytics-chart-heading">
+        <div><h4>Popular Price Bands</h4><p>Where buyer demand is concentrated</p></div>
+        <span>🏷️</span>
+      </div>
+      <div id="buyerPriceBandChart" class="analytics-bars compact-bars"></div>
+    </div>
+
+    <div class="analytics-insight-card">
+      <div class="analytics-insight-icon">✨</div>
+      <div>
+        <strong>AI Market Insights</strong>
+        <div id="buyingInsightsList"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="analytics-disclaimer" id="analyticsDataNote">
+    Demo analytics for SIH prototype. Replace illustrative time trends with real dated orders after deployment.
+  </div>
+</section>
+
+    </div>
+
+
+    <!-- Consumer Preference Onboarding -->
+    <div class="preference-modal-backdrop" id="consumerPreferenceModal" style="display:none;">
+      <div class="preference-modal">
+        <div class="preference-modal-top">
+          <div>
+            <div class="preference-kicker">PERSONALIZE YOUR MARKETPLACE</div>
+            <h2>What do you love?</h2>
+            <p>Choose more than one. KalaSetu will combine your interests with bestsellers and your activity.</p>
+          </div>
+          <button class="preference-close" id="preferenceCloseBtn" onclick="closeConsumerOnboarding()">×</button>
+        </div>
+
+        <div class="preference-section">
+          <label>1. What are you interested in?</label>
+          <div class="preference-chip-grid" id="prefCategories">
+            <button type="button" class="pref-chip" data-value="Bags" onclick="togglePreferenceChip(this)">🛍️ Bags</button>
+            <button type="button" class="pref-chip" data-value="Textiles" onclick="togglePreferenceChip(this)">🧵 Textiles</button>
+            <button type="button" class="pref-chip" data-value="Jewelry" onclick="togglePreferenceChip(this)">💍 Jewelry</button>
+            <button type="button" class="pref-chip" data-value="Pottery" onclick="togglePreferenceChip(this)">🏺 Pottery</button>
+            <button type="button" class="pref-chip" data-value="Woodwork" onclick="togglePreferenceChip(this)">🪵 Woodwork</button>
+            <button type="button" class="pref-chip" data-value="Paintings" onclick="togglePreferenceChip(this)">🖼️ Paintings</button>
+            <button type="button" class="pref-chip" data-value="Metalwork" onclick="togglePreferenceChip(this)">🔔 Metalwork</button>
+          </div>
+        </div>
+
+        <div class="preference-section">
+          <label>2. What are you shopping for?</label>
+          <div class="preference-chip-grid" id="prefOccasions">
+            <button type="button" class="pref-chip" data-value="Gifting" onclick="togglePreferenceChip(this)">🎁 Gifting</button>
+            <button type="button" class="pref-chip" data-value="Home Décor" onclick="togglePreferenceChip(this)">🏠 Home Décor</button>
+            <button type="button" class="pref-chip" data-value="Fashion & Accessories" onclick="togglePreferenceChip(this)">👗 Fashion</button>
+            <button type="button" class="pref-chip" data-value="Festivals & Weddings" onclick="togglePreferenceChip(this)">✨ Festivals / Weddings</button>
+            <button type="button" class="pref-chip" data-value="Collectibles" onclick="togglePreferenceChip(this)">🖼️ Collectibles</button>
+            <button type="button" class="pref-chip" data-value="Everyday Use" onclick="togglePreferenceChip(this)">☕ Everyday Use</button>
+          </div>
+        </div>
+
+        <div class="preference-section">
+          <label>3. Your style</label>
+          <div class="preference-chip-grid" id="prefStyles">
+            <button type="button" class="pref-chip" data-value="Traditional" onclick="togglePreferenceChip(this)">🪷 Traditional</button>
+            <button type="button" class="pref-chip" data-value="Contemporary" onclick="togglePreferenceChip(this)">◻ Contemporary</button>
+            <button type="button" class="pref-chip" data-value="Eco-friendly" onclick="togglePreferenceChip(this)">🌿 Eco-friendly</button>
+            <button type="button" class="pref-chip" data-value="Colorful" onclick="togglePreferenceChip(this)">🌈 Colorful</button>
+            <button type="button" class="pref-chip" data-value="Minimal" onclick="togglePreferenceChip(this)">🤍 Minimal</button>
+            <button type="button" class="pref-chip" data-value="Heritage" onclick="togglePreferenceChip(this)">🏛 Heritage</button>
+          </div>
+        </div>
+
+        <div class="preference-section">
+          <label>4. Materials you like</label>
+          <div class="preference-chip-grid" id="prefMaterials">
+            <button type="button" class="pref-chip" data-value="Cotton" onclick="togglePreferenceChip(this)">Cotton</button>
+            <button type="button" class="pref-chip" data-value="Silk" onclick="togglePreferenceChip(this)">Silk</button>
+            <button type="button" class="pref-chip" data-value="Jute" onclick="togglePreferenceChip(this)">Jute</button>
+            <button type="button" class="pref-chip" data-value="Wood" onclick="togglePreferenceChip(this)">Wood</button>
+            <button type="button" class="pref-chip" data-value="Clay" onclick="togglePreferenceChip(this)">Clay / Ceramic</button>
+            <button type="button" class="pref-chip" data-value="Brass" onclick="togglePreferenceChip(this)">Brass / Metal</button>
+            <button type="button" class="pref-chip" data-value="Natural Dyes" onclick="togglePreferenceChip(this)">Natural Dyes</button>
+          </div>
+        </div>
+
+        <div class="preference-section">
+          <label>5. Comfortable budget</label>
+          <div class="budget-choice-grid" id="prefBudgetChoices">
+            <button type="button" class="budget-choice" data-min="0" data-max="999" onclick="selectBudgetChoice(this)">Under ₹1,000</button>
+            <button type="button" class="budget-choice active" data-min="1000" data-max="2000" onclick="selectBudgetChoice(this)">₹1,000–₹2,000</button>
+            <button type="button" class="budget-choice" data-min="2000" data-max="5000" onclick="selectBudgetChoice(this)">₹2,000–₹5,000</button>
+            <button type="button" class="budget-choice" data-min="5000" data-max="999999" onclick="selectBudgetChoice(this)">₹5,000+</button>
+          </div>
+        </div>
+
+        <div class="preference-section">
+          <label>6. Regions you want to explore <span>(optional)</span></label>
+          <div class="preference-chip-grid" id="prefRegions">
+            <button type="button" class="pref-chip" data-value="Rajasthan" onclick="togglePreferenceChip(this)">Rajasthan</button>
+            <button type="button" class="pref-chip" data-value="Uttar Pradesh" onclick="togglePreferenceChip(this)">Uttar Pradesh</button>
+            <button type="button" class="pref-chip" data-value="Punjab" onclick="togglePreferenceChip(this)">Punjab</button>
+            <button type="button" class="pref-chip" data-value="Bihar" onclick="togglePreferenceChip(this)">Bihar</button>
+            <button type="button" class="pref-chip" data-value="West Bengal" onclick="togglePreferenceChip(this)">West Bengal</button>
+          </div>
+        </div>
+
+        <div class="preference-actions">
+          <button class="btn-secondary" onclick="useBestsellersOnly()">Use Bestsellers Only</button>
+          <button class="btn-primary" id="savePreferencesBtn" onclick="saveConsumerPreferences()">Save & Show My Picks →</button>
+        </div>
+
+        <div class="preference-privacy-note">
+          🔒 Your choices are used only to personalize KalaSetu recommendations. You can change them anytime.
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast Notification Popup -->
+    <div class="toast-popup" id="toastPopup">Notification message</div>
+
+    <!-- Dynamic Bottom Navigation Bar -->
+    <div class="bottom-nav-bar" id="bottomNavBar">
+      <!-- Generated dynamically by JS according to Consumer or Artisan Mode -->
+    </div>
+
+  </div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
+
